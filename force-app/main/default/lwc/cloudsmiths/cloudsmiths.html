@@ -1,0 +1,143 @@
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : Roshan
+  @group             : 
+  @last modified on  : 07-17-2023
+  @last modified by  : Roshan
+  Modifications Log
+  Ver   Date         Author   Modification
+  1.0   07-10-2023   Roshan   Initial Version
+-->
+<template>
+    <div>
+        <div class="slds-grid slds-grid_align-center slds-wrap">
+            <div class="slds-size_10-of-12 slds-var-m-around_x-small">
+                <c-expandable-section id="1" label="Generate Random SAID">
+                    <div class="slds-size_1-of-1 slds-box slds-box_small">
+                        <div class="slds-var-p-left_large">
+                            <div class="slds-text-heading_small">Constructed SA-ID [{generatedSAID}]</div>
+                            <div class="slds-var-m-top_medium slds-grid slds-wrap">
+                                <lightning-input
+                                    class="slds-size_3-of-12 slds-var-m-vertical_x-small"
+                                    type="date"
+                                    name="birthdate"
+                                    variant="label-hidden"
+                                    placeholder="Enter Your Birthdate..."
+                                    time-zone="UTC"
+                                    onchange={handleBirthdateChange}
+                                ></lightning-input>
+                                <lightning-radio-group
+                                    class="slds-size_1-of-1 inline-radio slds-var-m-vertical_x-small"
+                                    name="genderGroup"
+                                    label="Gender Group"
+                                    variant="label-hidden"
+                                    value="MEN"
+                                    options={genderOptions}
+                                    onchange={handleGenderOption}
+                                    type="radio"
+                                ></lightning-radio-group>
+                                <lightning-input
+                                    class="slds-size_1-of-1 slds-var-m-vertical_x-small"
+                                    type="toggle"
+                                    label="Citizenship"
+                                    name="citizenship"
+                                    message-toggle-active="SA citizen"
+                                    message-toggle-inactive="Permanent Resident"
+                                    onchange={handleCitizenship}
+                                    checked={isSACitizen}
+                                ></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </c-expandable-section>
+            </div>
+            <div class="slds-size_10-of-12 slds-box slds-var-m-around_x-small slds-grid">
+                <div class="slds-size_4-of-12">
+                    <lightning-input
+                        type="text"
+                        class="slds-size_1-of-1 slds-var-m-vertical_x-small"
+                        name="saidSearch"
+                        variant="label-hidden"
+                        onchange={handleSaidForSearchChange}
+                        pattern="[0-9]{13}"
+                        message-when-pattern-mismatch="Please provide valid 13 digits of SAID."
+                        min-length="13"
+                        max-length="13"
+                        placeholder="Enter Your 13 Digit SAID..."
+                    ></lightning-input>
+                    <!-- <div if:true={isShowMessage} class={saidMessageColor}><b>{saidMessage}</b></div> -->
+                </div>
+                <div class="slds-size_2-of-12 slds-var-m-top_x-small slds-grid slds-col_padded">
+                    <lightning-button
+                        variant="brand"
+                        label="Search SAID"
+                        title="Search Action"
+                        onclick={handleSaidSearch}
+                        disabled={isSearchDisabled}
+                    ></lightning-button>
+                </div>
+            </div>
+            <div class="slds-size_10-of-12 slds-box slds-var-m-around_x-small slds-grid" if:true={isValidSaidLength}>
+                <div>
+                    <div class="slds-text-heading_small slds-var-m-bottom_small">SAID Decoded:</div>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-1 slds-grid">
+                            <div class="slds-col_padded slds-size_3-of-12 slds-text-align_right">Birthdate:</div>
+                            <div>
+                                <lightning-formatted-date-time value={saidBirthDate}></lightning-formatted-date-time>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-grid">
+                            <div class="slds-col_padded slds-size_3-of-12 slds-text-align_right">Gender:</div>
+                            <div>{saidGender}</div>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-grid">
+                            <div class="slds-col_padded slds-size_3-of-12 slds-text-align_right">Citizenship:</div>
+                            <div>{saidCitizenship}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size_10-of-12 slds-box slds-var-m-around_x-small slds-grid" if:true={doneWithSaidSearch}>
+                <div style="width: 100%">
+                    <div>
+                        <lightning-button-group>
+                            <lightning-button
+                                label="Check Birth-Day Holiday"
+                                onclick={handleBirthdateHolidayCheck}
+                            ></lightning-button>
+                            <lightning-button
+                                label="Check Birth-Year Holidays"
+                                onclick={handleYearHolidayCheck}
+                            ></lightning-button>
+                        </lightning-button-group>
+                    </div>
+                    <div class="slds-var-m-top_medium slds-grid slds-wrap">
+                        <div
+                            class="slds-text-heading_small slds-var-m-bottom_x-small slds-var-m-left_x-small slds-size_1-of-1"
+                        >
+                            {holidayTableHeader}
+                        </div>
+                        <div
+                            class="slds-size_1-of-1 slds-align_absolute-center"
+                            style="height: 260px; background-color: #f7f7f7"
+                        >
+                            <div class="" if:true={showHolidayTable} style="height: 260px">
+                                <lightning-datatable
+                                    key-field="name"
+                                    data={calendarific_data}
+                                    columns={calendarific_columns}
+                                    hide-checkbox-column="true"
+                                ></lightning-datatable>
+                            </div>
+                            <div class="slds-text-color_inverse-weak" if:false={showHolidayTable}>
+                                <div>No Holiday Data</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
