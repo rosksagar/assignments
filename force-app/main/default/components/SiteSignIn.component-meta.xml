@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <description>Generalize Site Login Component.</description>
+    <label>SiteSignIn</label>
+    <packageVersions>
+        <majorNumber>12</majorNumber>
+        <minorNumber>0</minorNumber>
+        <namespace>ca_collab_2_0</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>1</minorNumber>
+        <namespace>sfadminapps</namespace>
+    </packageVersions>
+</ApexComponent>

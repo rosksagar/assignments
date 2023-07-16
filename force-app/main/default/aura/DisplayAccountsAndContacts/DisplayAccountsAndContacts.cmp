@@ -1,0 +1,69 @@
+<aura:component controller="DisplayAccountsAndContactsController" implements="force:appHostable" >
+    <aura:attribute name="accountsAndContacts" type="List" />
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}' />
+    <div>
+        <div class="" style="position:relative; top:100px;">
+            <div class="slds-show slds-spinner_container" aura:id="componentSpinner">
+                <div class="slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </div>
+        <div>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Account Source">Account Source</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="NumberOfEmployees">NumberOfEmployees</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Clean Status">Clean Status</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Birthdate">Birthdate</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{! v.accountsAndContacts }" var="row">
+                    <tr class="slds-hint-parent">
+                        <th data-label="Name" scope="row">
+                            <div class="slds-truncate" title="{! row.Name }">
+                                {! row.Name }
+                            </div>
+                        </th>
+                        <td data-label="Account Source">
+                            <div class="slds-truncate" title="{! row.AccountSource }">
+                                {! row.AccountSource }
+                            </div>
+                        </td>
+                        <td data-label="NumberOfEmployees">
+                            <div class="slds-truncate" title="{! row.NumberOfEmployees }">
+                                {! row.NumberOfEmployees }
+                            </div>
+                        </td>
+                        <td data-label="Clean Status">
+                            <div class="slds-truncate" title="{! row.CleanStatus }">
+                                {! row.CleanStatus }
+                            </div>
+                        </td>
+                        <td data-label="Birthdate">
+                            <div class="slds-truncate" title="{! row.Birthdate }">
+                                {! row.Birthdate }
+                            </div>
+                        </td>
+                    </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</aura:component>

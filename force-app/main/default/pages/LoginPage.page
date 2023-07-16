@@ -1,0 +1,112 @@
+<apex:page controller="SiteBaseController" showHeader="false" standardStylesheets="false" applyHtmlTag="false" docType="html-5.0" title="EAG">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>        
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,400i,500,600,700,800" rel="stylesheet" />        
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <style>
+                
+                /*************************TOAST DESIGN******************************/
+                .slds-scope .slds-notify_toast, .slds-scope .slds-notify--toast{margin: 0;}
+                .toast_container { position: fixed; top: 25px; left: 50%; margin-left: -15rem; width: 100%; max-width: 30rem; }
+                
+                /*************************LOGIN WINDOW******************************/
+                
+                .login-bg{background:url("{!URLFOR($Resource.MeMaSys,'images/MeMaSys-Back01.jpg')}")  no-repeat center center fixed; background-size: cover;}
+                .slds-scope{z-index: 9; position: relative; }
+                .slds-scope .slds-box { padding: 50px 25px 24px 25px;}
+                body.login-bg:before { content: ''; background:rgba(68, 68, 68, 0.52); display: block; position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
+                .slds-form-element__control { padding-bottom: 15px; }
+                
+                .login-window, .sign-up-window, .forgot-window { background: #58524a80; padding: 30px 30px; border-radius: 3px; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.22); }
+                
+                .login-btn, .btnStyle { width: 100%; background-color: #2196f3; border: none !important; height: 32px; color: #fff !important; border-radius: 3px; }
+                .slds-text-align_right.forgotLink { margin-top: -14px; font-size: 11px;}
+                .slds-text-align_right.forgotLink a { color: #ffffff90; }
+                .btnClass { margin-top: 10px; }
+                img.jet-icon { margin-bottom: 27px; }
+                
+                .slds-scope.main-container.fix-container { display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0; align-items: center;}
+                .slds-scope .slds-m-top_large, .slds-scope .slds-m-top--large{margin-top:0;}
+                .slds-scope .slds-container_small, .slds-scope .slds-container--small{width: 100%; margin: 0 auto;}
+                
+                
+                /*************************SIGNUP WINDOW******************************/
+                
+                .slds-scope .slds-m-top_small, .slds-scope .slds-m-top--small{margin-top:0;}
+                a.slds-text-align_center.sign-btn {display: block; color: #1b5297; margin-top: 15px; width: 100%; text-align: right; /* background: #fff; */ font-weight: 600; }
+             
+                
+                /*************************FORGOT PASSWORD******************************/
+                
+                h1.pageTitle { font-size: 18px; font-weight: 600; color: #ffffff90; } 
+                .forgot-window .linkTxt { padding: 15px 15px 0; display: block; font-weight: 600; font-size: 14px; color: #1b5297; margin-bottom:-15px;}
+                .forgot-window > .titleSection { padding: 0 15px 15px; }
+                .forgot-window .linkTxt:hover { color: #ffffff90; }
+                
+                /************************SPINNER******************************/
+                .spin-bg { background: rgba(0, 0, 0, 0.47); position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9001; }
+                .slds-scope .slds-spinner:before, .slds-scope .slds-spinner:after, .slds-scope .slds-spinner__dot-a:before, .slds-scope .slds-spinner__dot-b:before, .slds-scope .slds-spinner__dot-a:after, .slds-scope .slds-spinner__dot-b:after{background:#fff;}
+            
+                @media screen and (max-width:768px){
+                    .toast_container{left: 0; margin-left: 0;}
+                    .slds-scope .slds-notify_toast, .slds-scope .slds-notify--toast { min-width: 100%; }
+                    .slds-scope.main-container.fix-container{padding:15px;}
+                    .slds-scope .slds-container_small, .slds-scope .slds-container--small {max-width:100%;}
+                    .toast_container {padding:15px;}
+                    .login-window, .sign-up-window, .forgot-window{padding:15px;}
+                }
+            
+            
+            </style>
+        </head>
+        <body class="login-bg"    >
+            <div class="slds-scope main-container fix-container" align="center" >
+                <div class="slds-container_small">
+                    <div class="slds-m-top_large">
+                        <apex:form styleClass="">
+                            <apex:actionFunction name="updatePageMsg" reRender="panelId">
+                                <apex:param name="isShow" value="" assignTo="{!isMsgShow}"/>
+                                <apex:param name="msgType" value="" assignTo="{!msgType}"/>
+                                <apex:param name="pageMsg" value="" assignTo="{!pageMsg}"/>
+                            </apex:actionFunction>
+                            <apex:actionFunction name="showComponents" reRender="panelId">
+                                <apex:param name="isLoginShow" value="" assignTo="{!isLoginShow}"/>
+                                <apex:param name="isSignUpShow" value="" assignTo="{!isSignUpShow}"/>                                
+                                <apex:param name="isForgotPasswordShow" value="" assignTo="{!isForgotPasswordShow}"/>
+                                <apex:param name="isShow" value="{!ISBLANK('test')}" assignTo="{!isMsgShow}"/>
+                            </apex:actionFunction>
+                            <apex:actionFunction name="showSpinner" reRender="panelId">
+                                <apex:param name="isShowSpinner" value="" assignTo="{!isShowSpinner}"/>
+                            </apex:actionFunction>
+                            
+                            <apex:outputPanel id="panelId">                            
+                                <c:SiteNotifications show="{!isMsgShow}" type="{!msgType}" messagehead="{!pageMsg}"/>
+                                <apex:outputPanel rendered="{!isShowSpinner}">
+                                    <div class="spin-bg">
+                                        <div role="status" class="slds-spinner slds-spinner_medium">
+                                            <span class="slds-assistive-text">Loading</span>
+                                            <div class="slds-spinner__dot-a"></div>
+                                            <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                <div class="">
+                                    <!-- LOGIN Component -->
+                                    <c:SiteSignIn show="{!isLoginShow}"/>
+                                    <!-- ForgotPassword Component -->
+                                    <c:SiteForgotPassword show="{!isForgotPasswordShow}"/>
+                                    <!-- SIGNUP Component -->
+                                    <c:SiteSignUp show="{!isSignUpShow}"/>                                
+                                </div>
+                            </apex:outputPanel>
+                            
+                        </apex:form>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

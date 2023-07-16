@@ -1,0 +1,57 @@
+<aura:component controller="displayTasksController" implements="force:appHostable" >
+    <aura:attribute name="searchStr" type="String" />
+    <aura:attribute name="contacts" type="List" />
+    <div>
+        <div>
+            <lightning:input name="SearchStr" value="{! v.searchStr }" placeholder="type your search string..." label="Search Contact" />
+            <lightning:button label="Get Contacts" title="Get Contacts" onclick="{! c.getRecords }"/>
+        </div>
+        <div>
+            <c:CustomLightningDataTable records="{! v.contacts }"></c:CustomLightningDataTable>
+        </div>
+    </div>
+    
+    <!-- 
+    <aura:attribute name="AccountId" type="String" />
+    <aura:attribute name="Tasks" type="List" />
+    
+    <div>
+        <div>
+            <lightning:recordEditForm objectApiName="Contact">
+                <lightning:inputField aura:id="accountId" fieldName="AccountId" />
+            </lightning:recordEditForm>
+            <lightning:button label="Get Tasks" title="Get Tasks" onclick="{! c.getTasks }"/>
+        </div>
+        <div>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Subject">Subject</div>
+                        </th>
+                        <th class="" scope="col"></th>
+                        <th class="" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{! v.Tasks }" var="row">
+                        <tr class="slds-hint-parent">
+                            <th data-label="Subject" scope="row">
+                                <div class="slds-truncate" title="{! row.Subject }">
+                                    {! row.Subject }
+                                </div>
+                            </th>
+                            <td data-label="Account Source">
+                                <lightning:button name="{! row.Id }" label="Edit" title="Edit Task" onclick="{! c.editTask }"/>
+                            </td>
+                            <td data-label="NumberOfEmployees">
+                                <lightning:button name="{! row.Id }" label="Delete" title="Delete Task" onclick="{! c.deleteTask }"/>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    -->
+</aura:component>

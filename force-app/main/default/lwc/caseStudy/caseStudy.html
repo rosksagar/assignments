@@ -1,0 +1,36 @@
+<!--
+  @description       : 
+  @author            : DWS
+  @group             : 
+  @last modified on  : 05-04-2021
+  @last modified by  : DWS
+  Modifications Log 
+  Ver   Date         Author   Modification
+  1.0   05-01-2021   DWS     Initial Version
+-->
+<template>
+    <lightning-card title="Table Configuration" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <lightning-radio-group name="name" label="Close Date Sorting Order" options={options} value={sortDirection}
+                type="radio" onchange={sortByCloseDate}>
+            </lightning-radio-group>
+
+            <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small slds-m-top_small"
+                label="Filter By Record Type">
+            </lightning-input>
+
+            <template if:true={opportunities}>
+                <div style="height: 300px;">
+                    <lightning-datatable key-field="Id" data={opportunities} columns={columns}
+                        default-sort-direction={defaultSortDirection} sorted-direction={sortDirection}
+                        sorted-by={sortedBy} selected-rows={selectedRows} max-row-selection="1" onsave={handleSave}
+                        draft-values={saveDraftValues} hide-checkbox-column show-row-number-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+            <template if:true={error}>
+                {error}>
+            </template>
+        </div>
+    </lightning-card>
+</template>

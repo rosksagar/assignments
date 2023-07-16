@@ -1,0 +1,41 @@
+<apex:component controller="SiteSignInController">
+    
+    <!-- Attribute Definitions -->
+    <apex:attribute name="show" description="display or not" type="Boolean" required="true"/>
+    
+    <!-- Component Definition -->
+    <apex:outputPanel rendered="{!show}">
+        <div class="login-window">
+            <div class="">
+                <div class="slds-grid slds-wrap slds-align_absolute-center">
+                    <img src="{!URLFOR($Resource.MeMaSys,'images/logo-rel-v2.png')}" style="height: 240px; width: 350px;"/>
+                    <img src="{!URLFOR($Resource.MeMaSys,'images/e01.gif')}" style="height: 63px; width: 300px; margin-top: -20px; margin-bottom: 10px;" />
+                </div>
+                <div class="slds-m-horizontal_large slds-m-bottom_medium">
+                    <div class="">
+                        <!-- <label class="slds-form-element__label" for="username">Username</label> -->
+                        <div class="slds-form-element__control">
+                            <apex:input value="{!username}" type="text" id="username" html-placeholder="Username" styleClass="slds-input"/>
+                        </div>
+                    </div>
+                    <div class="">
+                        <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                        <div class="slds-form-element__control">
+                            <apex:inputSecret id="password" value="{!password}" html-placeholder="Password" styleClass="slds-input"/>
+                        </div>
+                        <div class="slds-text-align_right forgotLink">
+                            <a href="javascript:void(0);" onclick="showComponents(false, false, true); return false;" class="linkTxt">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                    <div class="btnClass">
+                        <apex:commandButton action="{!login}" onclick="showSpinner(true)" oncomplete="updatePageMsg({!isMsgShow}, '{!msgType}', '{!pageMsg}')" value="LOGIN" styleClass="slds-button slds-button_brand" style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <!-- <a href="javascript:void(0);" onclick="showComponents(false, true, false); return false;" class="slds-text-align_center sign-btn">Not a member?</a> -->
+            </div>
+        </div>
+    </apex:outputPanel>
+</apex:component>

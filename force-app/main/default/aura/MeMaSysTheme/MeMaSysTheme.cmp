@@ -1,0 +1,25 @@
+<aura:component implements="forceCommunity:themeLayout" access="global" description="Theme Layout for MeMaSys Portal.">
+    <aura:attribute name="search" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="navBar" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="newHeader" type="Aura.Component[]" required="false"/>
+    <div>
+        <!-- <div class="searchRegion">
+            {!v.search}
+        </div> -->
+        <div class="profileMenuRegion">
+            <div align="right" style="width:150px;">
+                {!v.profileMenu}
+            </div>            
+        </div>
+        <div class="navigation">
+            {!v.navBar}
+        </div>
+        <div class="newHeader">
+            {!v.newHeader}
+        </div>
+        <div class="mainContentArea">
+            {!v.body}
+        </div>
+    </div>
+</aura:component>

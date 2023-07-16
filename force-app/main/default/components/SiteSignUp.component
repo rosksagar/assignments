@@ -1,0 +1,68 @@
+<apex:component controller="SiteSignUpController">
+
+    <!-- Attribute Definitions -->
+    <apex:attribute name="show" description="display or not" type="Boolean" required="true"/>
+
+    <!-- Component Definition -->
+    <apex:outputPanel rendered="{!show}">
+        <div class="slds-m-top_small sign-up-window">
+            <img src="https://praviation-prod.s3.amazonaws.com/static/images/icon-1.png" style="max-width:65px;" class="jet-icon"/>
+            <div class="">
+                <div class="">
+                    <!-- <label class="slds-form-element__label" for="username">Username</label> -->
+                    <div class="slds-form-element__control">
+                        <apex:input value="{!firstName}" type="text" id="firstName" html-placeholder="FirstName" styleClass="slds-input"/>
+                    </div>
+                </div>
+                <div class="">
+                    <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                    <div class="slds-form-element__control">
+                        <apex:inputSecret id="lastName" value="{!lastName}" html-placeholder="LastName" styleClass="slds-input"/>
+                    </div>
+                </div>
+            </div>
+            <div class=" ">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control">
+                    <apex:inputSecret id="nickname" value="{!communityNickname}" html-placeholder="Nickname" styleClass="slds-input"/>
+                </div>
+            </div>
+            <div class=" ">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control">
+                    <apex:inputSecret id="email" value="{!email}" html-placeholder="Email" styleClass="slds-input"/>
+                </div>
+            </div>
+            <div class=" ">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control">
+                    <apex:inputSecret id="company" value="{!company}" html-placeholder="Company" styleClass="slds-input"/>
+                </div>
+            </div>
+            <div class=" ">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control">
+                    <apex:inputSecret id="password" value="{!password}" html-placeholder="Password" styleClass="slds-input"/>
+                </div>
+            </div>
+            <div class="">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control">
+                    <apex:inputSecret id="confirmPassword" value="{!confirmPassword}" html-placeholder="Confirm Password" styleClass="slds-input"/>
+                </div>
+            </div>
+            <div class="" align="right">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control slds-m-top_small">
+                    <apex:commandButton action="{!registerUser}" onclick="showSpinner(true);" oncomplete="updatePageMsg({!isMsgShow}, '{!msgType}', '{!pageMsg}')" value="SIGN UP" styleClass="btnStyle" />
+                </div>
+            </div>
+            <div align="right">
+                <!-- <label class="slds-form-element__label" for="password">Password</label> -->
+                <div class="slds-form-element__control" style="padding-bottom:0;">
+                    <a href="javascript:void(0);" onclick="showComponents(true, false, false);return false;" class="linkTxt">Already have an account?</a>
+                </div>
+            </div>
+        </div>
+    </apex:outputPanel>
+</apex:component>

@@ -1,0 +1,43 @@
+<apex:component >
+    
+    <!-- Attribute Definitions -->
+    <apex:attribute name="show" description="display toast msg or not" type="Boolean" required="true"/>
+    <apex:attribute name="type" description="display toast msg or not" type="String" required="true"/>
+    <apex:attribute name="width" description="toast width" type="String"/>
+    <apex:attribute name="messagehead" description="This is color for the text." type="String" required="true"/>
+    <apex:attribute name="messagedetail" description="display toast msg or not" type="String"/>
+    
+    <!-- Component Definition -->
+    <apex:outputPanel rendered="{!show}">
+        <div class="toast_container">
+            <div id="toastId" class="slds-notify_container slds-is-relative">
+                <div class="slds-notify slds-notify_toast slds-theme_{!LOWER(type)}" role="alert">
+                    <span class="slds-assistive-text">{!type}</span>
+                    <span class="slds-icon_container slds-icon-utility-{!LOWER(type)} slds-m-right_small slds-no-flex slds-align-top">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#{!LOWER(type)}" />
+                        </svg>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small ">{!messagehead}</h2>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(messagedetail))}">
+                            <p>{!messagedetail}</p>
+                        </apex:outputPanel>                    
+                    </div>
+                    <button type="button" onclick="hideToast();" class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close" />
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+        function hideToast() {
+            document.getElementById("toastId").style.display = "none";
+        }
+        setTimeout(hideToast, 3000);
+        </script>
+    </apex:outputPanel>
+</apex:component>

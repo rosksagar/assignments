@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Patient</fullName>
+    <active>true</active>
+    <description>Actual visited Patient, Created by doctor only.</description>
+    <label>Patient</label>
+    <picklistValues>
+        <picklist>Medicine__c</picklist>
+        <values>
+            <fullName>Paracetamol</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Symptoms__c</picklist>
+        <values>
+            <fullName>Fever</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : DWS
+  @group             : 
+  @last modified on  : 07-01-2021
+  @last modified by  : DWS
+  Modifications Log 
+  Ver   Date         Author   Modification
+  1.0   07-01-2021   DWS   Initial Version
+-->
+<apex:page controller="SearchRecordsController">  
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2">
+                <apex:inputText value="{! searchBoxstring }" label="Search"/>
+                <apex:commandButton value="Search" action="{! searchbox }" ></apex:commandButton>
+                <!-- 
+                <apex:pageblockTable value="{!result}" var="wl">
+                    <apex:column value="{!wl.name}"/>
+                    <apex:column value="{!wl.account.name}"/>
+                    <apex:column value="{!wl.id}"/>
+                </apex:pageblockTable>   
+                -->
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1">
+                <apex:repeat value="{! result }" var="list">
+                    <div>
+                        <apex:repeat value="{! list }" var="record">
+                            <div>
+                                {! record['Name'] }
+                            </div>
+                        </apex:repeat>
+                    </div>
+                </apex:repeat>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

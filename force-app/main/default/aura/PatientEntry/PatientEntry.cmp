@@ -1,0 +1,44 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+    
+	<aura:attribute name="patient" type="Patient__c"/>
+    <aura:attribute name="PId" type="String"/>
+    
+    <div class="">
+        <lightning:recordEditForm aura:id="patientForm" 
+                                  recordId="{!v.PId}"
+                                  recordtypeid="0126F000001oV0W"
+                                  objectApiName="Patient__c">
+            <lightning:messages />
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+                    <lightning:inputField fieldName="First_Name__c" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+					<lightning:inputField fieldName="Last_Name__c" />
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+                    <lightning:inputField fieldName="Mobile__c" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+                    <lightning:inputField fieldName="Age__c" />
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+                    <lightning:inputField fieldName="Day__c" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_xx-small">
+                    <lightning:inputField fieldName="Fees__c" />
+                </div>					
+            </div>
+            <div class="slds-p-around_xx-small">
+                <lightning:inputField fieldName="Symptoms__c" />
+                <lightning:inputField fieldName="Medicine__c" />
+            </div>
+            <lightning:button aura:id="submit" type="submit" label="Submit" class="slds-m-top_medium" />
+        </lightning:recordEditForm>
+    </div>  
+</aura:component>
