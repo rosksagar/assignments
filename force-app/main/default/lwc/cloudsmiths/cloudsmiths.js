@@ -340,7 +340,7 @@ export default class Cloudsmiths extends LightningElement {
         }
     }
 
-    handleBirthdateHolidayCheck() {
+    async handleBirthdateHolidayCheck() {
         if (this.saidBirthDate) {
             this.holidayTableHeader = "Check what all holidays are on birthdate.";
             let year = this.saidBirthDate.getFullYear();
